@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
-import breedRequest from './httpRequest/breed';
-import { useEffect, useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import CatList from './components/Cats/CatList/Catlist';
+import { Container, Row, Col, Button } from "react-bootstrap";
+import "./App.css";
+import breedRequest from "./httpRequest/breed";
+import { useEffect, useState } from "react";
+import CatList from "./components/Cats/CatList/Catlist";
 
 function App() {
   const [breeds, setBreeds] = useState([]);
@@ -15,7 +15,7 @@ function App() {
 
   const onChangeHandler = (e) => {
     setBreedId(e.target.value);
-  }
+  };
   return (
     <Container>
       <Row>
