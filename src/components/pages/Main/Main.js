@@ -1,21 +1,28 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import "./App.css";
-import breedRequest from "./httpRequest/breed";
+import "../../../App.css";
+import breedsRequest from "../../../httpRequest/breeds";
 import { useEffect, useState } from "react";
-import CatList from "./components/Cats/CatList/Catlist";
+import CatList from "../../Cats/CatList/Catlist";
+import imageRequest from '../../../httpRequest/images';
 
 function App() {
   const [breeds, setBreeds] = useState([]);
-  const [breedId, setBreedId] = useState(null);
+  const [list, setList] = useState([]);
+  const [selectedBreed, setSelectedBreed] = useState(null);
 
   useEffect(() => {
-    breedRequest.list().then((data) => setBreeds(data));
+    breedsRequest.list().then((data) => setBreeds(data));
   }, []);
 
-  const onChangeHandler = (e) => {
-    setBreedId(e.target.value);
-  };
+  useEffect(() => {
+    if (selectedBreed == null) return;
+    imageRequest.search(selectedBreed.id, 10, 1).then((data) => setList(data));
+  }, [selectedBreed]);
+
+  const onSelectBreedHandler = (e) =>
+    setSelectedBreed(breeds.find((data) => data.id === e.target.value));
+
   return (
     <Container>
       <Row>
@@ -27,7 +34,7 @@ function App() {
         <Col>
           <div>Breed</div>
           <select
-            onChange={onChangeHandler}
+            onChange={onSelectBreedHandler}
             name="breed"
             disabled={breeds.length < 1}
           >
@@ -43,7 +50,7 @@ function App() {
       </Row>
       <Row>
         <Col>
-          <CatList breedId={breedId} />
+          <CatList breeds={list} />
         </Col>
       </Row>
 

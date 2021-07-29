@@ -1,28 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
-import breedRequest from '../../../httpRequest/breed';
-const CatList = ({ breedId }) => {
-    const [cats, setCats] = useState([]);
-    useEffect(() => {
-      if (breedId == null) return;
-      breedRequest.search(breedId).then((data) => setCats(data));
-    }, [breedId]);
+import React from 'react';
+import { Card, Button, Row } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
-    if (cats.length < 1) {
-        return "No cats available";
+const CatList = ({ breeds }) => {
+  const history = useHistory();
+
+  const onClickHandler = (cat) => {
+    history.push(`/${cat.id}`);
+  };
+    if (breeds.length < 1) {
+      return "No cats available";
     }
 
     return (
-      <>
-        {cats.map((cat) => (
-            <Card key={cat.id} style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={ cat.url } />
-                <Card.Body>
-                <Button block variant="primary">View Details</Button>
-                </Card.Body>
-          </Card>
+      <Row>
+        {breeds.map((cat, idx) => (
+          <div className="col-md-3 col-sm-6 col-12">
+            <Card key={idx}>
+              <Card.Img variant="top" src={cat.url} />
+              <Card.Body>
+                <Button
+                  style={{ width: "100%" }}
+                  size="md"
+                  variant="primary"
+                  onClick={() => onClickHandler(cat)}
+                >
+                  View Details
+                </Button>
+              </Card.Body>
+            </Card>
+          </div>
         ))}
-      </>
+      </Row>
     );
 }
 
