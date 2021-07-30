@@ -8,4 +8,7 @@
 - [x] apply correct styling
 - [x] implement error catch
 - [x] check style of details component
-- [ ] unit testing
+- [x] unit testing
+
+# How to test
+`yarn test -u`
