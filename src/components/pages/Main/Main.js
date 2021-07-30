@@ -8,7 +8,7 @@ import imageRequest from "../../../httpRequest/images";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../App.css";
 import PageContainer from "../../PageContainer/PageContainer";
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getParameterByName } from '../../../utils/url-utils';
 
 const REQUEST_LIMIT = 10;
@@ -62,8 +62,10 @@ function App() {
       .finally(() => setLoading(false));
   }, [selectedBreed, page]);
 
-  const onSelectBreedHandler = (e) =>
+  const onSelectBreedHandler = (e) => {
     setSelectedBreed(breeds.find((data) => data.id === e.target.value));
+    setList([]);
+  }
 
   const onLoadMoreHandler = () => {
     setPage((prevState) => prevState + 1);

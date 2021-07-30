@@ -6,7 +6,5 @@
 - [x] list alot of breeds
 - [x] when going back ensure to return the old value via ?breed=id
 - [x] apply correct styling
-- [ ] implement error catch
-- [ ] check style of details component
-- [ ] implement unit test
-- [ ] feature test
+- [x] implement error catch
+- [x] check style of details component

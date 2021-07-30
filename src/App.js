@@ -1,6 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
-import { Container } from 'react-bootstrap';
 import Main from './components/pages/Main/Main';
 import Details from './components/pages/Details/Details';
 

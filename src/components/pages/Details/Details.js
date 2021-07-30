@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Button, Card } from "react-bootstrap";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import imagesRequest from "../../../httpRequest/images";
 import PageContainer from "../../PageContainer/PageContainer";
 

@@ -1,5 +1,8 @@
-// got answer from https://stackoverflow.com/a/901144
-// I could have used URLSearchParam but it's not available for all browser.
+/** 
+ * got answer from https://stackoverflow.com/a/901144
+ * I could have used URLSearchParam but it's not available for all browser.
+ * */ 
+
 export function getParameterByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, "\\$&");
   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
