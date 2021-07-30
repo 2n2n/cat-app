@@ -8,3 +8,4 @@
 - [x] apply correct styling
 - [x] implement error catch
 - [x] check style of details component
+- [ ] unit testing
