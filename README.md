@@ -6,3 +6,4 @@
 - [x] list alot of breeds
 - [ ] when going back ensure to return the old value via ?breed=id
 - [ ] apply correct styling
+- [ ] implement error catch

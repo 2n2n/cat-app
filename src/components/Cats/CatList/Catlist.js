@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Row } from 'react-bootstrap';
+import { Card, Button, Row, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const CatList = ({ breeds }) => {
@@ -14,23 +14,25 @@ const CatList = ({ breeds }) => {
 
     return (
       <Row>
-        {breeds.map((cat, idx) => (
-          <div className="col-md-3 col-sm-6 col-12">
-            <Card key={idx}>
-              <Card.Img variant="top" src={cat.url} />
-              <Card.Body>
-                <Button
-                  style={{ width: "100%" }}
-                  size="md"
-                  variant="primary"
-                  onClick={() => onClickHandler(cat)}
-                >
-                  View Details
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-        ))}
+        <Col className="col-12" style={{ marginBottom: "20px" }}>
+          {breeds.map((cat, idx) => (
+            <div key={idx} className="col-md-3 col-sm-6 col-12">
+              <Card>
+                <Card.Img variant="top" src={cat.url} />
+                <Card.Body>
+                  <Button
+                    style={{ width: "100%" }}
+                    size="md"
+                    variant="primary"
+                    onClick={() => onClickHandler(cat)}
+                  >
+                    View Details
+                  </Button>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
+        </Col>
       </Row>
     );
 }

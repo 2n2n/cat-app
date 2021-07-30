@@ -7,9 +7,11 @@ const get = (breedId) => {
     .then((res) => res.data);
 }
 
-const search = (breedId, limit = 10, page = 1) => {
+const search = (breedId, limit = 10, page = 0) => {
   return request()
-    .get(`/v1/images/search?breed_id=${breedId}&limit=${limit}&page=${page}`)
+    .get(
+      `/v1/images/search?order=asc&limit=${limit}&page=${page}&breed_id=${breedId}`
+    )
     .then((res) => res.data);
 };
 
