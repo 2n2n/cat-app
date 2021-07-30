@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-.Home {
+.Home, .Cat {
   padding: 20px 0px;
 }
 .Home .card {

@@ -12,20 +12,16 @@ import {
 
 function App() {
   return (
-    <div className="Home">
-      <Container>
-        <Router>
-          <Switch>
-            <Route path="/:catId">
-              <Details />
-            </Route>
-            <Route exact path="/">
-              <Main />
-            </Route>
-          </Switch>
-        </Router>
-      </Container>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/:catId">
+          <Details />
+        </Route>
+        <Route exact path="/">
+          <Main />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

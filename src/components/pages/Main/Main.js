@@ -7,6 +7,9 @@ import imageRequest from "../../../httpRequest/images";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../App.css";
+import PageContainer from "../../PageContainer/PageContainer";
+import { useParams, useLocation } from 'react-router-dom';
+import { getParameterByName } from '../../../utils/url-utils';
 
 const REQUEST_LIMIT = 10;
 
@@ -17,11 +20,20 @@ function App() {
   const [list, setList] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState(null);
   const [page, setPage] = useState(0);
+  const { search } = useLocation();
 
   useEffect(() => {
+    console.log(getParameterByName('breed', search));
     breedsRequest
       .list()
-        .then((data) => setBreeds(data))
+      .then((data) => {
+        let searchParam = getParameterByName('breed', search);
+        setBreeds(data);
+        if (searchParam != null) {
+          let selected = data.find(breed => breed.id === searchParam);
+          setSelectedBreed(selected);
+        }
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -55,18 +67,19 @@ function App() {
     setPage((prevState) => prevState + 1);
   };
   return (
-    <>
+    <PageContainer className="Home">
       <h1>Cat Browser</h1>
       <Row style={{ padding: "10px 0px" }}>
         <Col className="col-md-3 col-sm-6 col-12">
           <Form.Group>
             <Form.Label>Breed</Form.Label>
             <Form.Select
+              value={selectedBreed?.id}
               onChange={onSelectBreedHandler}
               name="breed"
               disabled={isLoading}
             >
-              <option name={null}>Select Breed</option>
+              <option value={null}>Select Breed</option>
               {breeds.map((breed, key) => (
                 <option key={key} value={breed.id}>
                   {breed.name}
@@ -87,13 +100,14 @@ function App() {
             <Button
               disabled={isLoading || selectedBreed === null}
               onClick={onLoadMoreHandler}
-              variant="success">
-              {isLoading ? "Loading cats...": "Load More" }
+              variant="success"
+            >
+              {isLoading ? "Loading cats..." : "Load More"}
             </Button>
           </Col>
         </Row>
       )}
-    </>
+    </PageContainer>
   );
 }
 
