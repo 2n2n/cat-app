@@ -12,7 +12,7 @@ import {
 
 function App() {
   return (
-    <div class="Home">
+    <div className="Home">
       <Container>
         <Router>
           <Switch>

@@ -11,6 +11,7 @@ import "../../../App.css";
 const REQUEST_LIMIT = 10;
 
 function App() {
+  const [isLoading, setLoading] = useState(true);
   const [breeds, setBreeds] = useState([]);
   const [lastPage, setLastPage] = useState(false);
   const [list, setList] = useState([]);
@@ -18,22 +19,33 @@ function App() {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    breedsRequest.list().then((data) => setBreeds(data));
+    breedsRequest
+      .list()
+        .then((data) => setBreeds(data))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
+    setPage(0);
+  }, [selectedBreed]);
+
+  useEffect(() => {
+    setLoading(true);
     if (selectedBreed == null) return;
-    imageRequest.search(selectedBreed.id, REQUEST_LIMIT, page).then((data) => {
-      if (data.length < 1) {
-        setLastPage(true);
-      }
-      if (page === 0) {
-        // if page is still 1, first time load.
-        setList(data);
-      } else {
-        setList((prevState) => [...prevState, ...data]);
-      }
-    });
+    imageRequest
+      .search(selectedBreed.id, REQUEST_LIMIT, page)
+      .then((data) => {
+        if (data.length < 1) {
+          setLastPage(true);
+        }
+        if (page === 0) {
+          // if page is still 1, first time load.
+          setList(data);
+        } else {
+          setList((prevState) => [...prevState, ...data]);
+        }
+      })
+      .finally(() => setLoading(false));
   }, [selectedBreed, page]);
 
   const onSelectBreedHandler = (e) =>
@@ -52,7 +64,7 @@ function App() {
             <Form.Select
               onChange={onSelectBreedHandler}
               name="breed"
-              disabled={breeds.length < 1}
+              disabled={isLoading}
             >
               <option name={null}>Select Breed</option>
               {breeds.map((breed, key) => (
@@ -72,8 +84,11 @@ function App() {
       {!lastPage && (
         <Row>
           <Col>
-            <Button onClick={onLoadMoreHandler} variant="success">
-              Load More
+            <Button
+              disabled={isLoading || selectedBreed === null}
+              onClick={onLoadMoreHandler}
+              variant="success">
+              {isLoading ? "Loading cats...": "Load More" }
             </Button>
           </Col>
         </Row>

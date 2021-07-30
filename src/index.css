@@ -16,3 +16,6 @@ code {
 .Home {
   padding: 20px 0px;
 }
+.Home .card {
+  margin-bottom: 20px;
+}
