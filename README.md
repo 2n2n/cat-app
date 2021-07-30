@@ -5,6 +5,8 @@
 - [x] implement correct loading state
 - [x] list alot of breeds
 - [x] when going back ensure to return the old value via ?breed=id
-- [ ] apply correct styling
+- [x] apply correct styling
 - [ ] implement error catch
 - [ ] check style of details component
+- [ ] implement unit test
+- [ ] feature test

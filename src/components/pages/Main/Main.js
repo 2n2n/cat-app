@@ -23,10 +23,9 @@ function App() {
   const { search } = useLocation();
 
   useEffect(() => {
-    console.log(getParameterByName('breed', search));
     breedsRequest
       .list()
-      .then((data) => {
+      .then((data = []) => {
         let searchParam = getParameterByName('breed', search);
         setBreeds(data);
         if (searchParam != null) {
@@ -46,9 +45,12 @@ function App() {
     if (selectedBreed == null) return;
     imageRequest
       .search(selectedBreed.id, REQUEST_LIMIT, page)
-      .then((data) => {
+      .then((data = []) => {
         if (data.length < 1) {
           setLastPage(true);
+        }
+        else {
+          setLastPage(false);
         }
         if (page === 0) {
           // if page is still 1, first time load.

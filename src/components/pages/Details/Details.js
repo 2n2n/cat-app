@@ -20,24 +20,24 @@ const Details = () => {
     <PageContainer className="Cat">
       <Row>
         <Col>
-          {isLoading ? (
-          <h3>Loading...</h3>
-        ) : (
-          <Card>
-            <Card.Header>
-              <Button type="primary" href={`/?breed=${data.breeds[0].id}`}>
-                Back
-              </Button>
-            </Card.Header>
-            <Card.Img variant="top" src={data.url} />
-            <Card.Body>
-              <h4>{data.breeds[0].name}</h4>
-              <h5>Origin: {data.breeds[0].origin}</h5>
-              <h6>{data.breeds[0].temparament}</h6>
-              <p>{data.breeds[0].description}</p>
-            </Card.Body>
-          </Card>
-        )}
+          {isLoading || data == null ? (
+            <h3>Loading...</h3>
+          ) : (
+            <Card>
+              <Card.Header>
+                <Button type="primary" href={`/?breed=${data.breeds[0].id}`}>
+                  Back
+                </Button>
+              </Card.Header>
+              <Card.Img variant="top" src={data.url} />
+              <Card.Body>
+                <h4>{data.breeds[0].name}</h4>
+                <h5>Origin: {data.breeds[0].origin}</h5>
+                <h6>{data.breeds[0].temperament}</h6>
+                <p>{data.breeds[0].description}</p>
+              </Card.Body>
+            </Card>
+          )}
         </Col>
       </Row>
     </PageContainer>
