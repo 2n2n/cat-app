@@ -1,3 +1,5 @@
+# Component Map
+![component-map](https://github.com/2n2n/cat-app/blob/5e877e34d5646e941527797333250c4fc48ab977/assets/images/component-map.png)
 # TODO
 - [x] create details screen of the cat
 - [x] implement react-router-dom
